@@ -1,7 +1,23 @@
-Sub.destroy_all
+################# AVOID MULTIPLICATIONS IN DATABASE #####################
+Subscription.destroy_all
+UserSubscription.destroy_all
+User.destroy_all 
 
 
-arrayOfSubs = 
+################# ALWAYS START W/FRESH IDS ###############################
+Subscription.reset_pk_sequence
+UserSubscription.reset_pk_sequence
+User.reset_pk_sequence
+
+
+######################## SEEDS FOR USERS ###########################
+User.create(name: "Joe Smith", email: "jws100@aexample.com", password: "abc123")
+User.create(name: "Lucy Bells", email: "bellszone9@aexample.com", password: "123abc")
+User.create(name: "Sandy Brown", email: "sbrown@asafezone.com", password: "abcd1234")
+
+
+####################### SEEDS FOR SUBS #######################
+subscriptions_array = 
 [
     {
         name: "HBO",
@@ -84,8 +100,8 @@ arrayOfSubs =
         amount: 149.40
     }
 ]
-Sub.create(subs)
 
-subs.each do |sub_hash|
-    Sub.create(sub_hash)
+
+subscriptions_array.each do |sub_hash|
+    Subscription.create(sub_hash)
 end
